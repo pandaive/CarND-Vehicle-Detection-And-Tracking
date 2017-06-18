@@ -21,12 +21,12 @@ The goals / steps of this project are the following:
 [video1]: ./project_video.mp4
 
 ### [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
+#### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
 
 ---
-###Writeup / README
+### Writeup / README
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
+##### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
 
 You're reading it!
 
@@ -56,6 +56,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 ##### 2. Explain how you settled on your final choice of HOG parameters.
 
 I tried various combinations of parameters and finally I'v chosen following parameters for each of features:
+
 | Param | Value |
 | ----- | ----- |
 | color_space | 'YCrCb' |
@@ -89,7 +90,7 @@ all using YCrCb 3-channel HOG features plus spatially binned color and histogram
 
 ![alt text][image5]
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+##### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
   Here is example image:
 
@@ -114,9 +115,9 @@ Here's an example result showing the heatmap from a test frame:
 
 ---
 
-###Discussion
+#### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 The most problematic was the issue with false positives. I spent most of the time and developing checking for this. What could work better, would maybe be trying to detect all lane lines and check if found object is linearly moving forward.
 
