@@ -11,14 +11,14 @@ The goals / steps of this project are the following:
 * Estimate a bounding box for vehicles detected.
 
 [//]: # (Image References)
-[image1]: ./image1_examples.jpg
-[image2]: ./image2_examples_color_hist.jpg
-[image3]: ./image3_examples_spatial.jpg
-[image4]: ./image4_examples_hog.jpg
-[image5]: ./image5_examples_boxes.jpg
-[image6]: ./image6_examples_windows_result.jpg
-[image7]: ./image7_examples_heatmap.jpg
-[video1]: ./project_video.mp4
+[image1]: ./images/image1_examples.jpg
+[image2]: ./images/image2_examples_color_hist.jpg
+[image3]: ./images/image3_examples_spatial.jpg
+[image4]: ./images/image4_examples_hog.jpg
+[image5]: ./images/image5_examples_boxes.jpg
+[image6]: ./images/image6_examples_windows_result.jpg
+[image7]: ./images/image7_examples_heatmap.jpg
+[video1]: ./images/project_video.mp4
 
 ### [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
 #### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -83,9 +83,9 @@ I used the sliding window search provided in one of the last course lessons on t
 The code may be found in cell #10 in a notebook.
 
 Ultimately I searched with three scales:
-* scale 1.5 within for cars far away 
-* scale 2.0 within for cars in the middle
-* scale 2.5 for cars close
+* scale 1.5 within pixels 400-596 for cars far away 
+* scale 2.0 within pixels 418-640 for cars in the middle distance
+* scale 2.5 within pixels 468-692 for cars that are in close distance
 all using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.
 
 ![alt text][image5]
@@ -95,6 +95,8 @@ all using YCrCb 3-channel HOG features plus spatially binned color and histogram
   Here is example image:
 
 ![alt text][image6]
+
+I optimized performance of the classifier by decreasing number of features by setting up parameters for feature extractions. (See *HOG* point 2.)
 ---
 
 ### Video Implementation
@@ -106,7 +108,7 @@ Here's a [link to my video result](./project_video.mp4)
 ##### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected. 
-I also implemented class _Detection_ to track previous detections. For each new frame, I was analysing previous detections. I was inspecting all detections that were somewhat in the middle of the picture - so they couldn't appear out of nowhere. If I found a detection in previous frame nearby, to the right-lower direction from a current one, that meant to me that the same car was detected there so I added heat to the heatmap for this detection. However, if there was no detection in previous frames, I removed the detection, assuming that it's a false positive. Looking at the improvement in video result after applying this method, I concluded this method worked quite well.
+I also implemented class _Detection_ to track previous detections. For each new frame, I was analysing previous detections. I was inspecting all detections that were somewhat in the middle of the picture - so they couldn't appear out of nowhere. If I found a detection in previous frame nearby, to the right-lower direction from a current one, that meant to me that the same car was detected there so I added heat to the heatmap for this detection. However, if there was no detection in previous frames, I removed the detection, assuming that it's a false positive. Looking at the improvement in video result after applying this method, I concluded this method worked quite well. The code for this is in cell #13, in class _Detection_
 
 Here's an example result showing the heatmap from a test frame:
 ![alt text][image7]
@@ -119,5 +121,5 @@ Here's an example result showing the heatmap from a test frame:
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-The most problematic was the issue with false positives. I spent most of the time and developing checking for this. What could work better, would maybe be trying to detect all lane lines and check if found object is linearly moving forward.
+The most problematic was the issue with false positives. I spent most of the time and developing extraction of them. What could work better, would be probably trying to detect all lane lines and check if found object is linearly moving forward through them.
 
