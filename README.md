@@ -72,6 +72,7 @@ Different combinations of parameters resulted in either big increase of features
 ##### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 I trained a linear SVM using all the features, to get the most of the information. I tried selecting out some features in quizes in course lessons, but it didn't give me results significant enough to apply it in my project.
+I picked parameters for SVM using GridSearch. The code for it is in cell #9. The chosen params are: kernel='linear', C=0.001, gamma=0.001
 The code for training the SVM is in cell #8 in the notebook.
 
 #### Sliding Window Search
@@ -83,7 +84,7 @@ I used the sliding window search provided in one of the last course lessons on t
 The code may be found in cell #10 in a notebook.
 
 Ultimately I searched with three scales:
-* scale 1.5 within pixels 400-596 for cars far away 
+* scale 1.5 within pixels 400-532 for cars far away 
 * scale 2.0 within pixels 418-640 for cars in the middle distance
 * scale 2.5 within pixels 468-692 for cars that are in close distance
 all using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.
